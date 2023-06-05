@@ -122,7 +122,7 @@ export const usePokemonStore = defineStore("PokemonStore", {
       this.loading = false;
     },
     addLimit(): number {
-      return (this.limit += 20);
+      return (this.limit += 25);
     },
     setCount(count: number): void {
       this.count = count;
