@@ -49,7 +49,7 @@ export const usePokemonStore = defineStore("PokemonStore", {
       water: "#379cfa",
     },
     typeSelected: "all",
-    limit: 0,
+    limit: 100,
     loading: false,
   }),
   actions: {
@@ -93,7 +93,7 @@ export const usePokemonStore = defineStore("PokemonStore", {
       );
 
       this.setCount(pokemonsOfType.length);
-      
+
       const pokemonsOfTypeFiltered = pokemonsOfType.slice(0, this.addLimit());
       for (const { pokemon: pokemonOfType } of pokemonsOfTypeFiltered) {
         const pokemon = await useApi.get(pokemonOfType.url);
@@ -122,7 +122,7 @@ export const usePokemonStore = defineStore("PokemonStore", {
       this.loading = false;
     },
     addLimit(): number {
-      return (this.limit += 25);
+      return (this.limit += 28);
     },
     setCount(count: number): void {
       this.count = count;
