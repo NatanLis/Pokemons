@@ -16,10 +16,13 @@
         <article class="w-full text-center md:w-1/2 md:text-left">
           <!-- my pokedex -->
           <Badge
+          v-if="PokemonStore.allPokemons"
+            @click="PokemonStore.allPokemons()"
             class="py-3 px-4 bg-slate-100 dark:bg-slate-800 [&_img]:hover:rotate-90 mt-12"
           >
             <img src="/pokeball.png" class="mr-2 w-5 transition-transform" />
-            My <b class="ml-1">Pokedéx</b>
+            <span v-if="PokemonStore.showAllPokemons">My <b class="ml-1">Pokedéx</b></span>
+            <span v-if="!PokemonStore.showAllPokemons" >Global <b class="ml-1">Pokedéx</b></span>
           </Badge>
 
           <h1 class="text-3xl mt-10">Who is that <b>Pokémon?</b></h1>
@@ -69,13 +72,19 @@
         class="py-3 px-4 bg-slate-100 dark:bg-slate-800 [&_img]:hover:rotate-90 mt-12"
       >
         <img src="/pokeball.png" class="mr-2 w-5 transition-transform" />
-        <b v-text="PokemonStore.count" class="mr-1"></b> Pokémons
+        <b v-if="PokemonStore.showAllPokemons" v-text="PokemonStore.count" class="mr-1" /> 
+        <b v-if="!PokemonStore.showAllPokemons" v-text="PokemonStore.countMyPokemons" class="mr-1" /> 
+        Pokémons
       </Badge>
 
-      <div v-if="PokemonStore.loading" class="flex justify-center mt-5">
+      <div v-if="PokemonStore.loading" class="flex justify-center my-5">
         <Spin />
       </div>
-      <List v-else :pokemons="PokemonStore.getPokemons" />
+      <List v-else-if="PokemonStore.showAllPokemons" :pokemons="PokemonStore.getPokemons" />
+      <List v-else-if="!PokemonStore.showAllPokemons" :pokemons="PokemonStore.getFavouritePokemons" />
+
+      <!-- <List v-else-if="allPokemons" :pokemons="PokemonStore.getPokemons" />
+      <List v-else-if="allPokemons" :pokemons="PokemonStore.getFavouritePokemons" /> -->
 
     </section>
   </div>
@@ -91,6 +100,8 @@ function changeDarkMode(isDark: boolean): void {
   dark.value = isDark;
 }
 function setType(type: string): void {
+  if(PokemonStore.showAllPokemons){PokemonStore.allPokemons()}
+  PokemonStore.allPokemons();
   PokemonStore.setTypeSelected(type);
   PokemonStore.resetLimit();
 

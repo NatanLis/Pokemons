@@ -18,6 +18,7 @@
       class="flex justify-center w-full mt-10"
     >
       <button
+        v-if="PokemonStore.showAllPokemons"
         @click="loadMore"
         class="p-3 mb-8 px-6 rounded-lg font-medium text-sm bg-slate-100 dark:bg-slate-800"
       >
@@ -46,7 +47,7 @@ function getPokemon(name: string): void {
 }
 
 function loadMore(): void {
-  if (PokemonStore.typeIsAll) {
+  if (PokemonStore.typeIsAll ) {
     PokemonStore.getAll();
     return;
   }

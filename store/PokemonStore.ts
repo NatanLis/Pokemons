@@ -1,14 +1,19 @@
+let allPokemons = true;
+
 interface Types {
   [name: string]: string;
 }
 
 interface State {
+  showAllPokemons: boolean;
   count: number;
+  countMyPokemons: number;
   name: string;
   pokemon: any;
   species: any;
   weaknesses: any;
   pokemons: any[];
+  favouritePokemons: any[];
   types: Types;
   typeSelected: string;
   limit: number;
@@ -21,12 +26,15 @@ function formatNumber(n: number): string {
 
 export const usePokemonStore = defineStore("PokemonStore", {
   state: (): State => ({
+    showAllPokemons: true,
     count: 0,
-    name: "Charmander",
+    countMyPokemons: 0,
+    name: "Pikachu",
     pokemon: {},
     species: {},
     weaknesses: {},
     pokemons: [],
+    favouritePokemons: [],
     types: {
       all: "#3e75c3",
       bug: "#9bba48",
@@ -49,7 +57,7 @@ export const usePokemonStore = defineStore("PokemonStore", {
       water: "#379cfa",
     },
     typeSelected: "all",
-    limit: 100,
+    limit: 104,
     loading: false,
   }),
   actions: {
@@ -127,6 +135,9 @@ export const usePokemonStore = defineStore("PokemonStore", {
     setCount(count: number): void {
       this.count = count;
     },
+    setMyCount(count: number): void {
+      this.countMyPokemons = count;
+    },
     reset(): void {
       this.name = "";
       this.pokemon = {};
@@ -142,10 +153,48 @@ export const usePokemonStore = defineStore("PokemonStore", {
     setTypeSelected(type: string): void {
       this.typeSelected = type;
     },
+    AddFavouritePokemon(): void {
+      if(!this.favouritePokemons.includes(this.pokemon)){
+        this.favouritePokemons.push(this.pokemon)
+        this.setMyCount(this.favouritePokemons.length)
+      } else {
+        const index = this.favouritePokemons.indexOf(this.pokemon);
+        if (index > -1) {
+          this.favouritePokemons.splice(index, 1);
+        }
+        this.setMyCount(this.favouritePokemons.length)
+      }
+    },
+    allPokemons(): boolean{
+      this.showAllPokemons = !this.showAllPokemons;
+       return this.showAllPokemons
+    },
+    isPokemonFavourite(){
+      if(this.favouritePokemons.includes(this.pokemon)){
+        return true;
+      }
+      else return false;
+    }
   },
   getters: {
     getPokemons(): any {
       return this.pokemons.map(({ name, id, sprites, types: t }) => {
+        const code = formatNumber(id);
+        const types = t.map(({ type }: any) => type.name);
+        const color = this.types[types[0]];
+        const image = sprites.other.dream_world.front_default;
+
+        return {
+          code,
+          name,
+          types,
+          color,
+          image,
+        };
+      });
+    },
+    getFavouritePokemons(): any {
+      return this.favouritePokemons.map(({ name, id, sprites, types: t }) => {
         const code = formatNumber(id);
         const types = t.map(({ type }: any) => type.name);
         const color = this.types[types[0]];
