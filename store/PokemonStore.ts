@@ -1,6 +1,9 @@
 import { Console } from "console";
+// import nuxtStorage from 'nuxt-storage';
+// const favouritePokemons = new Set<any>([]);
 
 let allPokemons = true;
+// nuxtStorage.localStorage.setData('yourFavouritePokemons', 'dupa');
 
 interface Types {
   [name: string]: string;
@@ -155,29 +158,14 @@ export const usePokemonStore = defineStore("PokemonStore", {
       this.typeSelected = type;
     },
     isPokemonFavourite(): any{
-      console.log(" isPokemonFavourite - start")
-      if(this.getFavouritePokemons.length === 0) return true
-
-      this.getFavouritePokemons.forEach((favPoks: Types) => {
-        if(favPoks.name === this.pokemon.name){
-          console.log(" poks juz jest dodany")
-          return true
-        } else{
-          console.log("zwraca prawed mzna dodaćo")
-          return false
-        }
-    })
-      console.log(" isPokemonFavourite - end")
+      return this.favouritePokemons.some(obj => obj.name === this.pokemon.name);
     },
     AddFavouritePokemon() {
-      const alreadyIn = this.getFavouritePokemons.some((el: any) => el.name === this.pokemon.name)
-      if(!alreadyIn){
-        console.log("dodaje poksa")
-        this.favouritePokemons.push(this.pokemon)
-        this.setMyCount(this.favouritePokemons.length)
+      if (this.isPokemonFavourite()) {
+        this.favouritePokemons = this.favouritePokemons.filter(obj => obj.name !== this.pokemon.name);
+      } else {
+        this.favouritePokemons.push(this.pokemon);
       }
-        console.log(this.getFavouritePokemons)
-
     },
     allPokemons(): boolean{
       this.showAllPokemons = !this.showAllPokemons;

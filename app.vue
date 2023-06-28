@@ -83,14 +83,12 @@
       <List v-else-if="PokemonStore.showAllPokemons" :pokemons="PokemonStore.getPokemons" />
       <List v-else-if="!PokemonStore.showAllPokemons" :pokemons="PokemonStore.getFavouritePokemons" />
 
-      <!-- <List v-else-if="allPokemons" :pokemons="PokemonStore.getPokemons" />
-      <List v-else-if="allPokemons" :pokemons="PokemonStore.getFavouritePokemons" /> -->
-
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
+
 // data
 const PokemonStore = usePokemonStore();
 const dark = useCookie<boolean>("dark");

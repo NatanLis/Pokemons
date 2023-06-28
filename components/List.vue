@@ -1,16 +1,20 @@
 <template>
   <section class="List">
     <div class="flex flex-wrap justify-center mt-5">
+      <transition-group name="bounce">
       <MiniCard
         v-for="{ code, name, types, color, image } in pokemons"
         @click="getPokemon(name)"
         :code="code"
         :name="name"
+        :key="name"
         :types="types"
         :color="color"
         :image="image"
         class="mt-12 mx-2 sm:max-w-xs hover:scale-105 transition-transform"
       />
+    </transition-group>
+
     </div>
 
     <p
@@ -27,7 +31,6 @@
     </p>
   </section>
 </template>
-
 <script setup lang="ts">
 interface Props {
   pokemons: any[];
@@ -56,4 +59,24 @@ function loadMore(): void {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+
+.bounce-enter-active {
+  animation: bounce-in 0.7s;
+}
+.bounce-leave-active {
+  display: none;
+  animation: bounce-in 0 ;
+}
+@keyframes bounce-in {
+  0% {
+      transform: scale(0);
+  }
+  50% {
+      transform: scale(1.25);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+</style>
