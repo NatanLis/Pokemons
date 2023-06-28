@@ -1,3 +1,5 @@
+import { Console } from "console";
+
 let allPokemons = true;
 
 interface Types {
@@ -57,7 +59,7 @@ export const usePokemonStore = defineStore("PokemonStore", {
       water: "#379cfa",
     },
     typeSelected: "all",
-    limit: 104,
+    limit: 52,
     loading: false,
   }),
   actions: {
@@ -72,7 +74,6 @@ export const usePokemonStore = defineStore("PokemonStore", {
         this.weaknesses = weaknesses;
       } catch (e) {
         this.reset();
-        console.log(e);
       }
     },
     async getAll(): Promise<void> {
@@ -153,28 +154,35 @@ export const usePokemonStore = defineStore("PokemonStore", {
     setTypeSelected(type: string): void {
       this.typeSelected = type;
     },
-    AddFavouritePokemon(): void {
-      if(!this.favouritePokemons.includes(this.pokemon)){
+    isPokemonFavourite(): any{
+      console.log(" isPokemonFavourite - start")
+      if(this.getFavouritePokemons.length === 0) return true
+
+      this.getFavouritePokemons.forEach((favPoks: Types) => {
+        if(favPoks.name === this.pokemon.name){
+          console.log(" poks juz jest dodany")
+          return true
+        } else{
+          console.log("zwraca prawed mzna dodaćo")
+          return false
+        }
+    })
+      console.log(" isPokemonFavourite - end")
+    },
+    AddFavouritePokemon() {
+      const alreadyIn = this.getFavouritePokemons.some((el: any) => el.name === this.pokemon.name)
+      if(!alreadyIn){
+        console.log("dodaje poksa")
         this.favouritePokemons.push(this.pokemon)
         this.setMyCount(this.favouritePokemons.length)
-      } else {
-        const index = this.favouritePokemons.indexOf(this.pokemon);
-        if (index > -1) {
-          this.favouritePokemons.splice(index, 1);
-        }
-        this.setMyCount(this.favouritePokemons.length)
       }
+        console.log(this.getFavouritePokemons)
+
     },
     allPokemons(): boolean{
       this.showAllPokemons = !this.showAllPokemons;
        return this.showAllPokemons
     },
-    isPokemonFavourite(){
-      if(this.favouritePokemons.includes(this.pokemon)){
-        return true;
-      }
-      else return false;
-    }
   },
   getters: {
     getPokemons(): any {

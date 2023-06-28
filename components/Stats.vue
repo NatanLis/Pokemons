@@ -4,6 +4,7 @@
     <p v-text="percent" class="p-2 mr-3 text-sm" />
     <div class="w-full h-1 relative bg-slate-200 dark:bg-slate-700">
       <div
+        style="transition: 0.5s"
         :style="{ background: color, width: `${getPercent}%` }"
         class="h-full absolute" />
 

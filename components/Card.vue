@@ -43,15 +43,6 @@
     <aside
       class="info w-full relative rounded-3xl overflow-hidden p-4 pt-8 -mt-6 z-10 bg-white dark:bg-slate-800"
     >
-
-    <!-- add to favourite -->
-      <!-- <Badge
-        @click="PokemonStore.AddFavouritePokemon"
-        v-if="!PokemonStore.pokemonEmpty"
-        class="p-2 bg-slate-100 dark:bg-slate-700 [&_img]:hover:scale-105">
-        <img src="/heart.svg" class=" w-5 transition-transform" />
-      </Badge> -->
-
       <Tabs
         :tabs="{
           about: 'About',

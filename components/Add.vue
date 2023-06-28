@@ -3,9 +3,12 @@
         @click="PokemonStore.AddFavouritePokemon"
         v-if="!PokemonStore.pokemonEmpty"
         class=" mr-1 mb-1 [&_img]:hover:scale-105 z-100	">
+        1
         <transition name="bounce">
-            <img v-if="!PokemonStore.isPokemonFavourite()" src="/heart.svg" class=" w-5 transition-transform" />
+            <img v-if="PokemonStore.isPokemonFavourite()" src="/heart.svg" class=" w-5 transition-transform" />
             <img v-else src="/filledHeart.svg" class="favourite w-5 transition-transform" />
+            <!-- <img src="/filledHeart.svg" class="favourite w-5 transition-transform" /> -->
+
         </transition>
     </Badge>
   </template>
