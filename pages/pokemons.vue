@@ -11,8 +11,8 @@
         <DarkMode @change="changeDarkMode" />
       </header>
 
-      <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
-        <div  class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff0000] to-[${PokemonStore.getColor}] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" :style="{ background: PokemonStore.getColor }" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" />
+      <div  style="animation: circle 45s ease-in-out infinite;" class="absolute inset-x-0 -top-50 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+        <div  class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[${PokemonStore.getColor}] to-[${PokemonStore.getColor}] opacity-90 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" :style="{ background: PokemonStore.getColor }" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" />
       </div>
       <!-- main -->
       <main class="w-full flex flex-wrap md:mt-20">
@@ -70,6 +70,9 @@
         </aside>
       </main>
 
+      <div  style="animation: circle2 90s ease-in-out infinite;" class="absolute inset-y-0 -left-50 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+        <div  class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-trfrom-[${PokemonStore.getColor}] to-[${PokemonStore.getColor}] opacity-90 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" :style="{ background: PokemonStore.getColor }" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" />
+      </div>
       <!-- list -->
       <Badge
         class="py-3 px-4 bg-slate-100 dark:bg-slate-800 [&_img]:hover:rotate-90 mt-12"
@@ -137,7 +140,57 @@ body * {
   pointer-events: none !important;
 }
 
-.footer {
-  /* background: rgb(55, 156, 250); */
+@keyframes circle {
+	0% {
+		transform: rotate(0deg);
+	}
+	10% {
+		transform: rotate(36deg);
+	}
+	20% {
+		transform: rotate(72deg);
+	}
+	30% {
+		transform: rotate(108deg);
+	}
+	40% {
+		transform: rotate(144deg);
+	}
+	50% {
+		transform: rotate(180deg);
+	}
+	60% {
+		transform: rotate(216deg);
+	}
+	70% {
+		transform: rotate(252deg);
+	}
+	80% {
+		transform: rotate(288deg);
+	}
+	90% {
+		transform: rotate(324deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes circle2 {
+	0% {
+		transform: rotate(0deg);
+	}
+	25% {
+		transform: rotate(180deg);
+	}
+	50% {
+		transform: rotate(360deg);
+	}
+	25% {
+		transform: rotate(180deg);
+	}
+	100% {
+		transform: rotate(0deg);
+	}
 }
 </style>

@@ -15,8 +15,7 @@
   </template>
 
 <script setup lang="ts">
-const dark = useCookie<boolean>("dark");
-console.log(dark.value)
+// const dark = useCookie<boolean>("dark");
 const PokemonStore = usePokemonStore();
 </script>
 
