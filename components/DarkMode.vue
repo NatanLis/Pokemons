@@ -32,6 +32,7 @@ const dark = useCookie<boolean>("dark", {
 const emit = defineEmits<{
   (e: "change", dark: boolean): void;
 }>();
+
 </script>
 
 <style scoped>

@@ -16,6 +16,7 @@ interface State {
   typeSelected: string;
   limit: number;
   loading: boolean;
+  darkMode: boolean;
 }
 
 function formatNumber(n: number): string {
@@ -57,16 +58,15 @@ export const usePokemonStore = defineStore("PokemonStore", {
     typeSelected: "all",
     limit: 28,
     loading: false,
+    darkMode: false,
   }),
   actions: {
     async get(): Promise<void> {
       try {
-        await console.log("pytam się o " + this.name)
         const pokemon = await useApi.get(`/pokemon/${this.name.toLowerCase()}`);
-        console.log("2pytam się o " + this.name)
-
         const species = await useApi.get(pokemon.species.url);
         const weaknesses = await useApi.get(pokemon.types[0].type.url);
+
 
         this.pokemon = pokemon;
         this.species = species;
