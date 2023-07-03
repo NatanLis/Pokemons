@@ -1,10 +1,3 @@
-import { Console } from "console";
-// import nuxtStorage from 'nuxt-storage';
-// const favouritePokemons = new Set<any>([]);
-
-let allPokemons = true;
-// nuxtStorage.localStorage.setData('yourFavouritePokemons', 'dupa');
-
 interface Types {
   [name: string]: string;
 }
@@ -62,13 +55,16 @@ export const usePokemonStore = defineStore("PokemonStore", {
       water: "#379cfa",
     },
     typeSelected: "all",
-    limit: 52,
+    limit: 28,
     loading: false,
   }),
   actions: {
     async get(): Promise<void> {
       try {
+        await console.log("pytam się o " + this.name)
         const pokemon = await useApi.get(`/pokemon/${this.name.toLowerCase()}`);
+        console.log("2pytam się o " + this.name)
+
         const species = await useApi.get(pokemon.species.url);
         const weaknesses = await useApi.get(pokemon.types[0].type.url);
 
