@@ -1,4 +1,4 @@
-
+![Pokédex](./public/thumb.png)
 # Pokédex
 ### Pokedéx with Nuxt 3 + Typescript + Tailwind
 
