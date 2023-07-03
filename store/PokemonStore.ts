@@ -1,10 +1,3 @@
-import { Console } from "console";
-// import nuxtStorage from 'nuxt-storage';
-// const favouritePokemons = new Set<any>([]);
-
-let allPokemons = true;
-// nuxtStorage.localStorage.setData('yourFavouritePokemons', 'dupa');
-
 interface Types {
   [name: string]: string;
 }
@@ -23,6 +16,7 @@ interface State {
   typeSelected: string;
   limit: number;
   loading: boolean;
+  darkMode: boolean;
 }
 
 function formatNumber(n: number): string {
@@ -62,8 +56,9 @@ export const usePokemonStore = defineStore("PokemonStore", {
       water: "#379cfa",
     },
     typeSelected: "all",
-    limit: 52,
+    limit: 28,
     loading: false,
+    darkMode: false,
   }),
   actions: {
     async get(): Promise<void> {
@@ -71,6 +66,7 @@ export const usePokemonStore = defineStore("PokemonStore", {
         const pokemon = await useApi.get(`/pokemon/${this.name.toLowerCase()}`);
         const species = await useApi.get(pokemon.species.url);
         const weaknesses = await useApi.get(pokemon.types[0].type.url);
+
 
         this.pokemon = pokemon;
         this.species = species;
