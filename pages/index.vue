@@ -19,7 +19,7 @@
               <div v-if="dark" class=" relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#fff] to-[#4F46E5] opacity-60 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style="clip-path: polygon(50% 0%, 61% 35%, 100% 0, 65% 45%, 100% 100%, 49% 53%, 0 100%, 33% 46%, 0 0, 39% 35%);)" />
             </div>
           <div class="mx-auto max-w-2xl py-16 sm:py-24 lg:py-32">
-            <div class="hidden sm:mb-8 sm:flex sm:justify-center" @click="rickRolled = !rickRolled">
+            <div class="hidden sm:mb-8 sm:flex sm:justify-center">
               <div  class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 dark:ring-white-900 hover:ring-gray-900/20">
                 We are announcing the next round of financing our studies <a href="#" target="" class="font-semibold text-red-600 dark:text-indigo-600"><span class="absolute inset-0" aria-hidden="true" />Pleas help <span aria-hidden="true">&rarr;</span></a>
               </div>
@@ -51,7 +51,7 @@
                   </NuxtLink>
                 </div>
                 <div class="added-transition rounded-md bg-red-600  dark:bg-indigo-600 px-3.5 py-3.5 text-sm font-semibold hover:bottom-1 relative text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                  <NuxtLink to="/createAccount">
+                  <NuxtLink to="/signup">
                     Create account
                   </NuxtLink>
                 </div>

@@ -9,9 +9,10 @@
       </header>
       <div class="flex items-center justify-center text-not-that-higher mt-6 sm:mt-0">
         <div class="relative isolate lg:px-8">
+
+          <Polygon  />
+
           <div class="mx-auto max-w-3xl py-16 sm:py-24 lg:py-32">
-            <div class="hidden sm:mb-8 sm:flex sm:justify-center">
-            </div>
             <div class="text-center">
               <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-7xl  dark:text-white">Create Your account</h1>
               <!-- <div  class="my-2 relative overflow-hidden">
@@ -27,32 +28,36 @@
               <form @submit.prevent="handleSubmit" class="mt-8 space-y-6">
                 <div class="rounded-md shadow-sm space-y-4 text-left">
                   <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email address</label>
-                    <input id="email" name="email" type="email" required
+                    <label for="email"  class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email address</label>
+                    <input id="email" v-model="email" name="email" type="email" required
                       class="mt-1 relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-slate-800 dark:border-gray-700 dark:text-white"
                       placeholder="Email address">
                   </div>
                   <div>
                     <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
-                    <input id="password" name="password" type="password" required
+                    <input id="password" v-model="password" name="password" type="password" required
                       class="mt-1 relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-slate-800 dark:border-gray-700 dark:text-white"
                       placeholder="Password">
                   </div>
                   <div>
                     <label for="confirm-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Confirm Password</label>
-                    <input id="confirm-password" name="confirm-password" type="password" required
+                    <input id="confirm-password" v-model="password2"  name="confirm-password" type="password" required
                       class="mt-1 relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-slate-800 dark:border-gray-700 dark:text-white"
                       placeholder="Confirm Password">
                   </div>
                 </div>
 
                 <div class="mt-6 flex items-center">
-                  <input id="terms" name="terms" type="checkbox" required
+                  <input id="terms"  v-model="rodo" name="terms" type="checkbox" required
                     class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded dark:bg-slate-800 dark:border-gray-700">
                   <label for="terms" class="ml-2 block text-sm text-gray-900 dark:text-gray-400">
                     I agree to the terms and conditions
                   </label>
                 </div>
+
+                <h2 v-if="error" class="text-2xl text-red-600 dark:text-indigo-500 dark:opacity-75">
+                  Something went wrong. Try again trainer!
+                </h2>
 
                 <div class="mt-6 flex justify-center">
                   <button type="submit"
@@ -62,12 +67,7 @@
                 </div>
               </form>
 
-
-              <p v-if="error" class="mt-6 text-higher text-lg leading-8 text-gray-600 dark:text-white dark:opacity-75">
-                Join the ultimate Pokémon trainers community by creating an account.
-              </p>
-
-              <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+              <p class=" text-sm text-gray-600 dark:text-gray-400">
                 Already have an account?
                 <NuxtLink to="/login" class="font-medium text-red-600 dark:text-indigo-600 hover:text-red-700 dark:hover:text-indigo-700">
                   Log in
@@ -82,14 +82,19 @@
 </template>
 
 <script setup lang="ts">
-// import { useRoute } from 'vue-router';
+import { useRoute, Router } from 'vue-router';
+// import { useCookie } from 'vue-cookie-next';
+import { ref } from 'vue';
 
 const router = useRoute();
+
 const dark = useCookie<boolean>("dark");
+
 
 const email = ref('');
 const password = ref('');
 const password2 = ref('');
+const rodo = ref('');
 const error = ref(false);
 
 function changeDarkMode(isDark: boolean): void {
@@ -102,11 +107,13 @@ function handleSubmit() {
   error.value = false;
 
   if (password.value !== password2.value) {
-    alert('Passwords do not match');
+    // alert('Passwords do not match');
     error.value = true;
     return;
   }
-  // router.push({path: "/pokemons"})
+
+  // router.push({ path: "/pokemons" });
+  router.push("/");
   console.log('Form submitted- end');
   }
 </script>

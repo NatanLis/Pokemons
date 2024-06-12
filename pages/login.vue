@@ -1,57 +1,67 @@
 <template>
   <div :class="{ dark: dark }">
-    <section class="App min-h-screen p-6 pb-0 lg:px-20 max-w-full overflow-x-hidden dark:text-white dark:bg-slate-900">
-      <!-- header -->
+    <section
+      class="App min-h-screen p-6 pb-0 lg:px-20 max-w-full overflow-x-hidden dark:text-white dark:bg-slate-900"
+    >
       <header class="relative w-full flex justify-between items-center">
         <img src="/pokemon.svg" class="w-32" />
-        <DarkMode @change="changeDarkMode" />
+        <DarkMode @change="changeDarkMode" class="z-10"/>
       </header>
-
       <div class="flex items-center justify-center text-not-that-higher mt-6 sm:mt-0">
-        <div class="isolate lg:px-8">
-          <div  style="animation: circle 55s ease-in-out infinite;" class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-100" aria-hidden="true">
-            <div v-if="!dark"  class=" relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff0000] to-[#ff0000] opacity-60 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" />
-            <div v-if="dark" class=" relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#fff] to-[#4F46E5] opacity-60 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" />
-          </div>
-          <div  style="animation: circle 95s ease-in-out infinite;" class="absolute inset-x-0 -top-40 right-0 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-100" aria-hidden="true">
-            <div v-if="!dark"  class=" relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#f00] to-[#f00] opacity-60 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style="clip-path: polygon(50% 0%, 61% 35%, 100% 0, 65% 45%, 100% 100%, 49% 53%, 0 100%, 33% 46%, 0 0, 39% 35%);" />
-            <div v-if="dark" class=" relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#fff] to-[#4F46E5] opacity-60 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style="clip-path: polygon(50% 0%, 61% 35%, 100% 0, 65% 45%, 100% 100%, 49% 53%, 0 100%, 33% 46%, 0 0, 39% 35%);)" />
-          </div>
+        <div class="relative isolate lg:px-8">
+          <Polygon />
 
-          <!-- login form -->
-          <div class="flex items-center justify-center min-h-screen" style="width: 500px;">
-            <form class="bg-white dark:bg-slate-800 p-8 rounded-lg shadow-lg w-full">
-              <h2 class="text-3xl mb-6 text-center">Login</h2>
+          <div class="mx-auto max-w-3xl py-16 sm:py-24 lg:py-32">
+            <div class="hidden sm:mb-8 sm:flex sm:justify-center">
+            </div>
+            <div class="text-center">
+              <!-- <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-7xl  dark:text-white">Log in, Trainer</h1> -->
+              <!-- <div  class="my-2 relative overflow-hidden">
+                <img src="/stars.svg" alt="" class="mx-auto">
+                <img v-if="dark" src="/img-pokeball-blue.png" alt="" class="mx-auto">
+                <img  v-if="!dark" src="/img-pokeball-red.png" alt="" class="mx-auto">
+              </div> -->
+              <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-7xl  dark:text-white">Log in, Trainer</h1>
 
-              <label class="block mb-4">
-                <span class="text-gray-700 dark:text-white">Email</span>
-                <input type="email" v-model="email" class="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm dark:bg-slate-700" placeholder="you@example.com">
-              </label>
+              <p class="mt-6 text-higher text-lg leading-8 text-gray-600 dark:text-white dark:opacity-75">
+                Hop in and start your journey to become the ultimate Pokémon trainer.
+              </p>
 
-              <label class="block mb-6">
-                <span class="text-gray-700 dark:text-white">Password</span>
-                <input type="password" v-model="password" class="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm dark:bg-slate-700" placeholder="Enter your password">
-              </label>
+              <form @submit.prevent="handleSubmit" class="mt-8 space-y-6">
+                <div class="rounded-md shadow-sm space-y-4 text-left">
+                  <div>
+                    <label for="email"  class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email address</label>
+                    <input id="email" v-model="email" name="email" type="email" required
+                      class="mt-1 relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-slate-800 dark:border-gray-700 dark:text-white"
+                      placeholder="Email address">
+                  </div>
+                  <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+                    <input id="password" v-model="password" name="password" type="password" required
+                      class="mt-1 relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-slate-800 dark:border-gray-700 dark:text-white"
+                      placeholder="Password">
+                  </div>
+                </div>
 
-              <div class="flex justify-between items-center">
-                <NuxtLink to="/">
-                  <button type="button" @click="cancelLogin" class="py-2 px-4 bg-red-500 text-white rounded-lg hover:bg-red-600">Cancel</button>
+                <h2 v-if="error" class="text-2xl text-red-600 dark:text-indigo-500 dark:opacity-75">
+                  Something went wrong. Try again trainer!
+                </h2>
+
+                <div class="mt-6 flex justify-center">
+                  <button type="submit"
+                    class="added-transition rounded-md bg-red-600 dark:bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-700 dark:hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Log in
+                  </button>
+                </div>
+              </form>
+
+              <p class=" text-sm text-gray-600 dark:text-gray-400">
+                Do not have an account?
+                <NuxtLink to="/signup" class="font-medium text-red-600 dark:text-indigo-600 hover:text-red-700 dark:hover:text-indigo-700">
+                  Create one
                 </NuxtLink>
-
-                <button type="submit" @click="login" class="py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Login</button>
-
-              </div>
-            </form>
-          </div>
-
-          <div style="animation: circle 60s ease-in-out infinite;" class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]" aria-hidden="true">
-            <div v-if="!dark" class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff0000] to-[#ff0000] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" />
-            <div v-if="dark" class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#4F46E5] to-[#fff] opacity-50 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" />
-          </div>
-
-          <div style="animation: circle 60s ease-in-out infinite;" class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]" aria-hidden="true">
-            <div v-if="!dark" class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff0000] to-[#ff0000] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" />
-            <div v-if="dark" class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#4F46E5] to-[#fff] opacity-50 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" />
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -60,27 +70,123 @@
 </template>
 
 <script setup lang="ts">
-const email = ref('');
-const password = ref('');
-const router = useRouter()
+import { useRoute, Router } from 'vue-router';
+// import { useCookie } from 'vue-cookie-next';
+import { ref } from 'vue';
 
-
-function cancelLogin() {
-  email.value = '';
-  password.value = '';
-}
-
-function login() {
-  // Add your login logic here
-  console.log('Logging in with:', email.value, password.value);
-  router.push("/pokemons")
-  // router.push('/pokemons');
-
-}
+const router = useRoute();
 
 const dark = useCookie<boolean>("dark");
+
+console.log(dark);
+
+
+const email = ref('');
+const password = ref('');
+const password2 = ref('');
+const error = ref(false);
 
 function changeDarkMode(isDark: boolean): void {
   dark.value = isDark;
 }
+
+function handleSubmit() {
+  console.log('Form submitted - start');
+  console.log(email.value, password.value, password2.value);
+  error.value = false;
+
+  if (password.value !== password2.value) {
+    // alert('Passwords do not match');
+    error.value = true;
+    return;
+  }
+
+  // router.push({ path: "/pokemons" });
+  router.push("/pokemons");
+  console.log('Form submitted- end');
+  }
 </script>
+
+<style>
+body * {
+  font-family: "Poppins", sans-serif;
+}
+
+.disabled {
+  cursor: no-drop;
+}
+
+.disabled * {
+  user-select: none;
+  pointer-events: none !important;
+}
+@keyframes float {
+	0% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-20px);
+	}
+	100% {
+		transform: translateY(0px);
+	}
+}
+
+
+@keyframes circle {
+	0% {
+		transform: rotate(0deg);
+	}
+	10% {
+		transform: rotate(36deg);
+	}
+	20% {
+		transform: rotate(72deg);
+	}
+	30% {
+		transform: rotate(108deg);
+	}
+	40% {
+		transform: rotate(144deg);
+	}
+	50% {
+		transform: rotate(180deg);
+	}
+	60% {
+		transform: rotate(216deg);
+	}
+	70% {
+		transform: rotate(252deg);
+	}
+	80% {
+		transform: rotate(288deg);
+	}
+	90% {
+		transform: rotate(324deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.text-higher{
+  position: relative;
+  top: -145px;
+}
+.text-not-that-higher{
+  position: relative;
+  top: -80px;
+}
+
+.added-transition {
+  transition: 0.5s !important;
+}
+.added-transition:hover {
+  top: -4px;
+}
+
+.rickVideo{
+    aspect-ratio: 16 / 9 !important;
+    width: 100% !important;
+}
+</style>
